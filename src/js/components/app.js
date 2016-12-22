@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import '../../css/app.css';
-import SelectTop from './selectTop';
 import AppointmentTimes from './appointmentTimes';
+import Modal from './modal';
 
-class App extends Component {
+class App extends Component{
+
+
   render() {
     return (
       <div>
-        <SelectTop />
         <AppointmentTimes />
       </div>
     );

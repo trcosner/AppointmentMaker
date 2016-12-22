@@ -1,33 +1,58 @@
 import React, {Component} from 'react';
 import TimeSlot from './timeSlot';
+import appointmentStore from '../stores/appointmentStore';
+import appointmentActions from '../actions/appointmentActions';
 
 class AppointmentTimes extends Component{
   constructor(props){
     super(props);
-    this.state = {
-      times: [
-        {id: 1, value: '9:00 am'},
-        {id: 2, value: '10:00 am'},
-        {id: 3, value: '11:00 am'},
-        {id: 4, value: '12:00 pm'},
-        {id: 5, value: '1:00 pm'},
-        {id: 6, value: '2:00 pm'},
-        {id: 7, value: '3:00 pm'},
-        {id: 8, value: '4:00 pm'},
-        {id: 9, value: '5:00 pm'},
-      ]
+    this.state = {appointments: appointmentStore.getAppointments()};
+    this._onChange = this._onChange.bind(this);
   }
-}
-  render() {
 
-    let timeSlots = this.state.times.map((timeObj) => {
+  componentDidMount(){
+    appointmentStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount(){
+    appointmentStore.removeChangeListener(this._onChange);
+  }
+
+  _onChange(){
+   this.setState({
+     appointments: appointmentStore.getAppointments()
+   })
+ }
+
+  render() {
+    const styles = {
+      container: {
+        width: '300px',
+        backgroundColor: 'hsl(0,0%,37%)',
+        align: 'center',
+        height: '60px',
+        margin: 'auto',
+        marginTop: '40px'
+      },
+      text:{
+        color: 'white',
+        textAlign: 'center',
+        fontSize: '28pt',
+        padding: '6px'
+      }
+    };
+
+    let timeSlots = this.state.appointments.map((appt) => {
       return (
-          <TimeSlot key={timeObj.id} time={timeObj} />
+          <TimeSlot key={appt.id} appointment={appt}/>
       );
     });
 
     return(
       <div>
+        <div style={styles.container}>
+          <div style={styles.text}>Appointments</div>
+        </div>
         {timeSlots}
       </div>
     )

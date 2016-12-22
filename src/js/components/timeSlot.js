@@ -1,6 +1,19 @@
 import React, {Component} from 'react';
+import Modal from './modal';
 
 class TimeSlot extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      isOpen: false
+    };
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal(){
+    this.setState({isOpen: !this.state.isOpen});
+  }
+
   render(){
     const styles = {
       container: {
@@ -21,9 +34,17 @@ class TimeSlot extends Component{
     };
 
     return(
-      <div style={styles.container}>
-        <div style={styles.text}>
-          {this.props.time.value}
+      <div>
+        <Modal
+          isOpen={this.state.isOpen}
+          toggleModal={this.toggleModal}
+          headerVal={this.props.appointment.value}
+          appointment={this.props.appointment}
+          />
+        <div style={styles.container}>
+          <div style={styles.text} onClick={this.toggleModal}>
+            {this.props.appointment.value}
+          </div>
         </div>
       </div>
     )
