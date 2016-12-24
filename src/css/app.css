@@ -8,22 +8,15 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-.example-enter {
-  opacity: 0.01;
+.timeSlot {
+  background-color: hsl(0,0%,98%);
+  text-align: center;
+  font-size: 18pt;
 }
 
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.example-leave {
-  opacity: 1;
-}
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+.timeSlot:hover {
+  background-color: hsl(360,100%,0%);
+  color: white;
 }
 
 .flexContainer{
@@ -33,8 +26,13 @@ body {
   flex-direction: column;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.modal-transition-enter {
+    opacity: 0.00;
+    transform: scale(0.7);
+    transition: all 0.2s;
+}
+
+.modal-transition-enter.modal-transition-enter-active {
+    opacity: 1;
+    transform: scale(1);
 }

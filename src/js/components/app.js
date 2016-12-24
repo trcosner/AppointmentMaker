@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import '../../css/app.css';
 import AppointmentTimes from './appointmentTimes';
-import Modal from './modal';
+import '../../css/app.css';
 
 class App extends Component{
-
-
   render() {
     return (
       <div>

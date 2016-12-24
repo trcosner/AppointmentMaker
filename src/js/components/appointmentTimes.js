@@ -1,28 +1,12 @@
 import React, {Component} from 'react';
 import TimeSlot from './timeSlot';
 import appointmentStore from '../stores/appointmentStore';
-import appointmentActions from '../actions/appointmentActions';
 
 class AppointmentTimes extends Component{
   constructor(props){
     super(props);
     this.state = {appointments: appointmentStore.getAppointments()};
-    this._onChange = this._onChange.bind(this);
   }
-
-  componentDidMount(){
-    appointmentStore.addChangeListener(this._onChange);
-  }
-
-  componentWillUnmount(){
-    appointmentStore.removeChangeListener(this._onChange);
-  }
-
-  _onChange(){
-   this.setState({
-     appointments: appointmentStore.getAppointments()
-   })
- }
 
   render() {
     const styles = {
@@ -42,9 +26,9 @@ class AppointmentTimes extends Component{
       }
     };
 
-    let timeSlots = this.state.appointments.map((appt) => {
+    let timeSlots = this.state.appointments.map((appt, index) => {
       return (
-          <TimeSlot key={appt.id} appointment={appt}/>
+          <TimeSlot key={index} appointmentId={appt.id}/>
       );
     });
 
